@@ -11,7 +11,6 @@ provider "aws" {
   region = "ap-south-1"
 }
 
-
 module "web-sg" {
   source = "github.com/nitheesh86/terraform-modules/modules/sg"
 
