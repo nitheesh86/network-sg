@@ -11,19 +11,18 @@ provider "aws" {
   region = "ap-south-1"
 }
 
-module "web-sg" {
+module "security_group" {
   source = "github.com/nitheesh86/terraform-modules/modules/sg"
 
-  name        = "computed-http-sg"
-  description = "Security group with HTTP port open for everyone, and HTTPS open just for the default security group"
-  vpc_id      = data.terraform_remote_state.vpc.outputs.vpc_id
+  name        = "security-group"
+  environment = "dev"
+  label_order = ["name", "environment"]
 
-  ingress_cidr_blocks = ["0.0.0.0/0"]
-
-  ingress_with_source_security_group_id = [
-    {
-      rule                     = "https-443-tcp"
-      source_security_group_id = data.aws_security_group.default.id
-    },
-  ]
+  enable_security_group = true
+  vpc_id                = data.terraform_remote_state.vpc.outputs.vpc_id
+  protocol              = "tcp"
+  description           = "Instance default security group (only egress access is allowed)."
+  allowed_ip            = ["172.16.0.0/16", "10.0.0.0/16"]
+  allowed_ipv6          = ["2405:201:5e00:3684:cd17:9397:5734:a167/128"]
+  allowed_ports         = [22, 27017]
 }
