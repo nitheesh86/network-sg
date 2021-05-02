@@ -19,7 +19,7 @@ module "security_group" {
   label_order = ["name", "environment"]
 
   enable_security_group = true
-  vpc_id                = data.terraform_remote_state.vpc.outputs.vpc_id
+  vpc_id                = vpc-0bcfc7dacc703ade8
   protocol              = "tcp"
   description           = "Instance default security group (only egress access is allowed)."
   allowed_ip            = ["172.16.0.0/16", "10.0.0.0/16"]
