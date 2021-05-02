@@ -16,7 +16,7 @@ module "web-sg" {
 
   name        = "computed-http-sg"
   description = "Security group with HTTP port open for everyone, and HTTPS open just for the default security group"
-  vpc_id      = vpc-0bcfc7dacc703ade8
+  vpc_id      = "vpc-0bcfc7dacc703ade8"
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
 
