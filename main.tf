@@ -12,7 +12,7 @@ provider "aws" {
 }
 
 
-module "http_sg" {
+module "web-sg" {
   source = "github.com/nitheesh86/terraform-modules/modules/sg"
 
   name        = "computed-http-sg"
